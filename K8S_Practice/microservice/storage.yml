@@ -1,0 +1,29 @@
+# What do we want?
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  storageClassName: mongo-storage
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+
+# How do we want it to be implemented?
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  storageClassName: mongo-storage
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/mnt/directory/mongodb/3.6.5"
+    type: DirectoryOrCreate

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:8.0.23
+    # args: ["mysqld", "--mysql-native-password=ON"]
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: root
+      - name: MYSQL_DATABASE
+        value: fleetman
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+  - name: http
+    port: 3306

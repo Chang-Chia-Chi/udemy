@@ -1,0 +1,3 @@
+ssh -i .\k8s-demo.pem ec2-user@<ip_address>
+
+eksctl create cluster --name <cluster-name> --nodes-min=3
